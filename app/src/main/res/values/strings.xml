@@ -9,4 +9,11 @@
     <string name="new_workout">New Workout</string>
     <string name="statistics">Statistics</string>
     <string name="about">About</string>
+    <string name="title_activity_new_workout">New Workout</string>
+    <string name="title">Title</string>
+    <string name="exercises">Exercises</string>
+    <string name="add_new_exercise">Add New Exercise</string>
+    <string name="save_workout">Save workout</string>
+
+
 </resources>

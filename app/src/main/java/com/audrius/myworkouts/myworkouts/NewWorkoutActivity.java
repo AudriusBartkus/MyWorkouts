@@ -1,27 +1,24 @@
 package com.audrius.myworkouts.myworkouts;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import android.view.View;
 
 
-public class mainActivity extends ActionBarActivity {
+public class NewWorkoutActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
+        setContentView(R.layout.activity_new_workout);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.new_workout, menu);
         return true;
     }
 
@@ -35,11 +32,5 @@ public class mainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void openNewWorkout(View view){
-        Intent intent = new Intent(this, NewWorkoutActivity.class);
-        startActivity(intent);
-
     }
 }

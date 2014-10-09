@@ -17,8 +17,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewWorkoutActivity"
+            android:name=".newWorkoutActivity"
             android:label="@string/title_activity_new_workout" >
+        </activity>
+        <activity
+            android:name=".addExerciseActivity"
+            android:label="@string/title_activity_add_exercise"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 

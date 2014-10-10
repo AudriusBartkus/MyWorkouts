@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
 
+import com.audrius.myworkouts.myworkouts.db.MySQLiteHelper;
+
 
 public class mainActivity extends ActionBarActivity {
 
@@ -14,7 +16,7 @@ public class mainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+        MySQLiteHelper db = new MySQLiteHelper(this);
     }
 
 
@@ -38,7 +40,7 @@ public class mainActivity extends ActionBarActivity {
     }
 
     public void openNewWorkout(View view){
-        Intent intent = new Intent(this, NewWorkoutActivity.class);
+        Intent intent = new Intent(this, newWorkoutActivity.class);
         startActivity(intent);
 
     }

@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    tools:context="com.audrius.myworkouts.myworkouts.AddExerciseActivity"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/new_exercise"
+        android:textSize="30dp"
+        android:id="@+id/textView"
+        android:layout_gravity="left|center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/name"
+        android:textSize="20dp"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameInput"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/save_exercise"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:onClick="save"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/weight"
+        android:id="@+id/weight"
+        android:layout_below="@+id/nameInput"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:enabled="true"
+        android:onClick="changeField"
+        android:checked="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/weightInput"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_below="@+id/nameInput"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/sets"
+        android:id="@+id/sets"
+        android:layout_below="@+id/weight"
+        android:layout_alignLeft="@+id/weight"
+        android:layout_alignStart="@+id/weight"
+        android:onClick="changeField"
+        android:checked="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/setsInput"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_above="@+id/repsInput"
+        android:layout_alignLeft="@+id/weightInput"
+        android:layout_alignStart="@+id/weightInput" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/reps"
+        android:id="@+id/reps"
+        android:layout_below="@+id/sets"
+        android:layout_alignLeft="@+id/sets"
+        android:layout_alignStart="@+id/sets"
+        android:onClick="changeField" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/repsInput"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_alignTop="@+id/reps"
+        android:layout_alignLeft="@+id/setsInput"
+        android:layout_alignStart="@+id/setsInput" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_unit"
+        android:textSize="20dp"
+        android:id="@+id/textView4"
+        android:layout_toEndOf="@+id/weightInput"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignTop="@+id/weightInput"
+        android:layout_toRightOf="@+id/weightInput" />
+
+</RelativeLayout>

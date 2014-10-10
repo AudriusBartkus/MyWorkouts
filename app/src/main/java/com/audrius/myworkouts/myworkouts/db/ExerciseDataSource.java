@@ -14,8 +14,8 @@ public class ExerciseDataSource {
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_NAME, MySQLiteHelper.COLUMN_WEIGHT, MySQLiteHelper.COLUMN_SETS, MySQLiteHelper.COLUMN_REPS};
+    private String[] allColumns = { MySQLiteHelper.EXERCISES_ID,
+            MySQLiteHelper.EXERCISES_NAME, MySQLiteHelper.EXERCISES_WEIGHT, MySQLiteHelper.EXERCISES_SETS, MySQLiteHelper.EXERCISES_REPS};
 
     public ExerciseDataSource(Context context) {
 
@@ -32,19 +32,17 @@ public class ExerciseDataSource {
 
     public void createExercise(Exercise exercise) {
         ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.COLUMN_NAME, exercise.getName());
-        values.put(MySQLiteHelper.COLUMN_WEIGHT, exercise.getWeight());
-        values.put(MySQLiteHelper.COLUMN_SETS, exercise.getSets());
-        values.put(MySQLiteHelper.COLUMN_REPS, exercise.getReps());
+        values.put(MySQLiteHelper.EXERCISES_NAME, exercise.getName());
+        values.put(MySQLiteHelper.EXERCISES_WEIGHT, exercise.getWeight());
+        values.put(MySQLiteHelper.EXERCISES_SETS, exercise.getSets());
+        values.put(MySQLiteHelper.EXERCISES_REPS, exercise.getReps());
 
         database.insert(MySQLiteHelper.TABLE_EXERCISES, null, values);
-        System.out.println("Added to db");
     }
 
     public void deleteExercise(Exercise exercise) {
         long id = exercise.getId();
-        System.out.println("Exercise deleted with id: " + id);
-        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.COLUMN_ID
+        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.EXERCISES_ID
                 + " = " + id, null);
     }
 

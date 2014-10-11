@@ -14,6 +14,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String EXERCISES_WEIGHT = "weight";
     public static final String EXERCISES_SETS = "sets";
     public static final String EXERCISES_REPS = "reps";
+    public static final String EXERCISES_WORKOUT_ID = "workout_id";
 
 
     public static final String TABLE_WORKOUTS = "workouts";
@@ -31,13 +32,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    @Override public void onCreate(SQLiteDatabase database) {
-        System.out.println("kuriam");
+
+    @Override
+    public void onCreate(SQLiteDatabase database) {
+      //  System.out.println("kuriam");
         String query;
-        query = "CREATE TABLE " + TABLE_EXERCISES + "( " + EXERCISES_ID + " INTEGER PRIMARY KEY, " + EXERCISES_NAME + " TEXT, " + EXERCISES_WEIGHT + " INTEGER, " + EXERCISES_SETS + " INTEGER, " + EXERCISES_REPS +" INTEGER)";
+        query = "CREATE TABLE " + TABLE_EXERCISES + "( " + EXERCISES_ID + " INTEGER PRIMARY KEY, " + EXERCISES_NAME + " TEXT, " + EXERCISES_WEIGHT + " INTEGER, " + EXERCISES_SETS + " INTEGER, " + EXERCISES_REPS +" INTEGER, " + EXERCISES_WORKOUT_ID + " INTEGER)";
         String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TIME)";
         database.execSQL(query);
         database.execSQL(workoutQuery);
+
     }
 
 

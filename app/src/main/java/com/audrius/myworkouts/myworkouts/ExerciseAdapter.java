@@ -46,7 +46,7 @@ public class ExerciseAdapter extends BaseAdapter{
         if (rowView == null) {
             // Get a new instance of the row layout view
             LayoutInflater inflater = activity.getLayoutInflater();
-            rowView = inflater.inflate(R.layout.list_example_entry, null);
+            rowView = inflater.inflate(R.layout.list_exercises, null);
 
             // Hold the view objects in an object, that way the don't need to be "re-  finded"
             view = new ViewHolder();
@@ -62,7 +62,7 @@ public class ExerciseAdapter extends BaseAdapter{
         Exercise item = list.get(position);
         view.exercise_name.setText(item.getName());
         System.out.println(item.getName());
-        view.description.setText(String.valueOf(item.getWeight()) + " kg     " + String.valueOf(item.getSets()) + "x" + String.valueOf(item.getReps()));
+        view.description.setText(String.valueOf(item.getWeight()) + " kg     " + String.valueOf(item.getSets()) + "x" + String.valueOf(item.getReps())+ "     workout id: "+String.valueOf(item.getWorkout_id()) );
         return rowView;
     }
 

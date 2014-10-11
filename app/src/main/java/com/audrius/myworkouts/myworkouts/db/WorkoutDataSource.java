@@ -19,20 +19,23 @@ public class WorkoutDataSource {
 
     public WorkoutDataSource(Context context){
         dbHelper = new MySQLiteHelper(context);
+
     }
 
     public void open() { database = dbHelper.getReadableDatabase();}
 
     public void close() { dbHelper.close(); }
 
-    public void createWorkout(Workout workout){
+    public long createWorkout(Workout workout){
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.WORKOUTS_NAME, workout.getName());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        values.put(MySQLiteHelper.WORKOUTS_TIME, dateFormat.format(workout.getTime()));
+      //  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+       // values.put(MySQLiteHelper.WORKOUTS_TIME, dateFormat.format(workout.getTime()));
 
-        database.insert(MySQLiteHelper.TABLE_WORKOUTS, null, values);
+        long last = database.insert(MySQLiteHelper.TABLE_WORKOUTS, null, values);
+        return last;
     }
+
 
     public void deleteWorkout(Workout workout){
         //TODO: check if id is assigned when creating a workout and exercise

@@ -6,30 +6,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
+import com.audrius.myworkouts.myworkouts.db.WorkoutDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
+import com.audrius.myworkouts.myworkouts.models.Workout;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class newWorkoutActivity extends ActionBarActivity {
-    private ExerciseDataSource datasource;
+    private ExerciseDataSource exDatasource;
+    private WorkoutDataSource workDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_workout);
-
-        datasource = new ExerciseDataSource(this);
-        datasource.open();
-
-        ArrayList<Exercise> values = datasource.getAllExercises();
+        exDatasource = new ExerciseDataSource(this);
+        exDatasource.open();
+        workDatasource = new WorkoutDataSource(this);
+        workDatasource.open();
+        //exDatasource.dropDB();
+        ArrayList<Exercise> values = exDatasource.getAllUnassignedExercises();
 
 
 //        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this,
-//                R.layout.list_example_entry, values);
+//                R.layout.list_exercises, values);
         ListView list = (ListView) findViewById(R.id.list);
         ExerciseAdapter adapter = new ExerciseAdapter(this, values);
         list.setAdapter(adapter);
@@ -62,44 +67,34 @@ public class newWorkoutActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
-        datasource.open();
+        exDatasource.open();
+        workDatasource.open();
+
+        ArrayList<Exercise> values = exDatasource.getAllUnassignedExercises();
+
+
+//        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this,
+//                R.layout.list_exercises, values);
+        ListView list = (ListView) findViewById(R.id.list);
+        ExerciseAdapter adapter = new ExerciseAdapter(this, values);
+        list.setAdapter(adapter);
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        datasource.close();
+        exDatasource.close();
+        workDatasource.close();
         super.onPause();
     }
 
+
     public void save(View view){
-        @SuppressWarnings("unchecked")
-        ListView list = (ListView)findViewById(R.id.list);
-        ArrayAdapter<Exercise> adapter = (ArrayAdapter<Exercise>) list.getAdapter();
-
-
-
-        switch (view.getId()) {
-            case R.id.button2:
-                // save exercise to the database
-                Exercise exercise = new Exercise();
-                exercise.setName("kuku");
-                exercise.setWeight(1);
-                exercise.setReps(2);
-                exercise.setSets(3);
-
-                datasource.createExercise(exercise);
-                //adapter.add(exercise);
-                break;
-//            /*case R.id.delete:
-//                if (getListAdapter().getCount() > 0) {
-//                    comment = (Exercise) getListAdapter().getItem(0);
-//                    datasource.deleteExercise(comment);
-//                    adapter.remove(comment);
-//                }
-//                break;*/
-        }
-        adapter.notifyDataSetChanged();
+        Workout workout = new Workout();
+        EditText titleInput = (EditText)findViewById(R.id.title_input);
+        workout.setName(titleInput.getText().toString());
+        long last = workDatasource.createWorkout(workout);
+        exDatasource.assignUnassignedExercises(last);
     }
 
 }

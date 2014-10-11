@@ -2,9 +2,12 @@ package com.audrius.myworkouts.myworkouts;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -13,6 +16,27 @@ import com.audrius.myworkouts.myworkouts.models.Exercise;
 
 public class addExerciseActivity extends Activity {
     private ExerciseDataSource datasource;
+    private EditText weightInput;
+    private EditText setsInput;
+    private EditText repsInput;
+    private EditText nameInput;
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3)
+        {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            checkFieldsForEmptyValues();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +44,18 @@ public class addExerciseActivity extends Activity {
         setContentView(R.layout.activity_add_exercise);
         datasource = new ExerciseDataSource(this);
         datasource.open();
+
+        weightInput = (EditText)findViewById(R.id.weightInput);
+        setsInput = (EditText)findViewById(R.id.setsInput);
+        repsInput =(EditText)findViewById(R.id.repsInput);
+        nameInput =(EditText)findViewById(R.id.nameInput);
+
+        weightInput.addTextChangedListener(textWatcher);
+        setsInput.addTextChangedListener(textWatcher);
+        repsInput.addTextChangedListener(textWatcher);
+        nameInput.addTextChangedListener(textWatcher);
+
+        checkFieldsForEmptyValues();
     }
 
 
@@ -42,34 +78,13 @@ public class addExerciseActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeField(View view){
-        boolean checked = ((CheckBox) view).isChecked();
-        EditText input;
-        switch(view.getId()) {
-            case R.id.weight:
-                input = (EditText) findViewById(R.id.weightInput);
-                input.setFocusableInTouchMode(checked);
-                input.setFocusable(checked);
-                if (!checked) {
-                    input.getText().clear();
-                }
-                break;
-            case R.id.sets:
-                input = (EditText) findViewById(R.id.setsInput);
-                input.setFocusableInTouchMode(checked);
-                input.setFocusable(checked);
-                if (!checked) {
-                    input.getText().clear();
-                }
-                break;
-            case R.id.reps:
-                input = (EditText) findViewById(R.id.repsInput);
-                input.setFocusableInTouchMode(checked);
-                input.setFocusable(checked);
-                if (!checked) {
-                    input.getText().clear();
-                }
-                break;
+    private void checkFieldsForEmptyValues(){
+        Button button = (Button)findViewById(R.id.save_exercise);
+        if (!nameInput.getText().toString().trim().isEmpty() && !weightInput.getText().toString().trim().isEmpty()
+                && !setsInput.getText().toString().trim().isEmpty() && !repsInput.getText().toString().trim().isEmpty()){
+            button.setEnabled(true);
+        } else {
+            button.setEnabled(false);
         }
 
     }
@@ -86,7 +101,9 @@ public class addExerciseActivity extends Activity {
         exercise.setWeight(Integer.parseInt(weightInput.getText().toString()));
         exercise.setSets(Integer.parseInt(setsInput.getText().toString()));
         exercise.setReps(Integer.parseInt(repsInput.getText().toString()));
+        //exercise.setWorkout_id(1);
         datasource.createExercise(exercise);
         //adapter.add(exercise);
+        this.finish();
     }
 }

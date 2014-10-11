@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustPan"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:configChanges="keyboardHidden|orientation"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -18,7 +22,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/title_input"
         android:layout_below="@+id/title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -30,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/exercises"
         android:id="@+id/exercises"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/title_input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="30dp" />
@@ -60,9 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_workout"
-        android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="save"/>
+        android:id="@+id/save_workout"
+        android:onClick="save"
+        android:layout_below="@+id/list"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

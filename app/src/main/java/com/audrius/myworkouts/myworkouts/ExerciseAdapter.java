@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ExerciseAdapter extends BaseAdapter{
     private final Activity activity;
     private final List<Exercise> list;
+    private ExerciseDataSource datasource;
+
 
     @Override
     public int getCount() {
@@ -61,7 +64,6 @@ public class ExerciseAdapter extends BaseAdapter{
         /** Set data to your Views. */
         Exercise item = list.get(position);
         view.exercise_name.setText(item.getName());
-        System.out.println(item.getName());
         view.description.setText(String.valueOf(item.getWeight()) + " kg     " + String.valueOf(item.getSets()) + "x" + String.valueOf(item.getReps())+ "     workout id: "+String.valueOf(item.getWorkout_id()) );
         return rowView;
     }

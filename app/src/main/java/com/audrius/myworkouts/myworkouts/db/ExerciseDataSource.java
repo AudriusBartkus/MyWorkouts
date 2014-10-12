@@ -91,7 +91,6 @@ public class ExerciseDataSource {
         Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_EXERCISES + " WHERE " + MySQLiteHelper.EXERCISES_WORKOUT_ID + " = 0", null );
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            System.out.println(cursor.getPosition());
             updateExerciseId(cursor.getLong(0), id);
             cursor.moveToNext();
         }

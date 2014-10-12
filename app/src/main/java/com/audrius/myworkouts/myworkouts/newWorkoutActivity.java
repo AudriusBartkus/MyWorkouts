@@ -1,11 +1,16 @@
 package com.audrius.myworkouts.myworkouts;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -20,6 +25,28 @@ import java.util.ArrayList;
 public class newWorkoutActivity extends ActionBarActivity {
     private ExerciseDataSource exDatasource;
     private WorkoutDataSource workDatasource;
+    private ArrayList<Exercise> values;
+    private ListView list;
+    private ExerciseAdapter adapter;
+    private EditText nameInput;
+
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3)
+        {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            checkFieldsForEmptyValues();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +56,49 @@ public class newWorkoutActivity extends ActionBarActivity {
         exDatasource.open();
         workDatasource = new WorkoutDataSource(this);
         workDatasource.open();
+        nameInput = (EditText)findViewById(R.id.title_input);
+        nameInput.addTextChangedListener(textWatcher);
+        checkFieldsForEmptyValues();
         //exDatasource.dropDB();
-        ArrayList<Exercise> values = exDatasource.getAllUnassignedExercises();
+        values = exDatasource.getAllUnassignedExercises();
 
-
-//        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this,
-//                R.layout.list_exercises, values);
-        ListView list = (ListView) findViewById(R.id.list);
-        ExerciseAdapter adapter = new ExerciseAdapter(this, values);
+        list = (ListView) findViewById(R.id.list);
+        adapter = new ExerciseAdapter(this, values);
         list.setAdapter(adapter);
+
+
+
+
+        // Create a ListView-specific touch listener. ListViews are given special treatment because
+        // by default they handle touches for their list items... i.e. they're in charge of drawing
+        // the pressed state (the list selector), handling list item clicks, etc.
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        list,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+
+                                for (int position : reverseSortedPositions) {
+                                    Exercise exercise = values.get(position);
+                                    exDatasource.deleteExercise(exercise);
+                                }
+                                adapter.notifyDataSetChanged();
+                                onResume();
+                            }
+                        });
+        list.setOnTouchListener(touchListener);
+        // Setting this scroll listener is required to ensure that during ListView scrolling,
+        // we don't look for swipes.
+        list.setOnScrollListener(touchListener.makeScrollListener());
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,6 +138,7 @@ public class newWorkoutActivity extends ActionBarActivity {
         ListView list = (ListView) findViewById(R.id.list);
         ExerciseAdapter adapter = new ExerciseAdapter(this, values);
         list.setAdapter(adapter);
+        checkFieldsForEmptyValues();
         super.onResume();
     }
 
@@ -97,4 +158,13 @@ public class newWorkoutActivity extends ActionBarActivity {
         exDatasource.assignUnassignedExercises(last);
     }
 
+    private void checkFieldsForEmptyValues(){
+        Button button = (Button)findViewById(R.id.save_workout);
+        if (!nameInput.getText().toString().trim().isEmpty() && !exDatasource.getAllUnassignedExercises().isEmpty()){
+            button.setEnabled(true);
+        } else {
+            button.setEnabled(false);
+        }
+
+    }
 }

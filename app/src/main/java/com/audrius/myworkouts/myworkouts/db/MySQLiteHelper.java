@@ -35,7 +35,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-      //  System.out.println("kuriam");
         String query;
         query = "CREATE TABLE " + TABLE_EXERCISES + "( " + EXERCISES_ID + " INTEGER PRIMARY KEY, " + EXERCISES_NAME + " TEXT, " + EXERCISES_WEIGHT + " INTEGER, " + EXERCISES_SETS + " INTEGER, " + EXERCISES_REPS +" INTEGER, " + EXERCISES_WORKOUT_ID + " INTEGER)";
         String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TIME)";

@@ -1,5 +1,6 @@
 package com.audrius.myworkouts.myworkouts;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -57,17 +58,18 @@ public class selectWorkoutActivity extends ActionBarActivity {
         list.setOnScrollListener(touchListener.makeScrollListener());
 
         list.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // When clicked, show a toast with the TextView text
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startWorkout((Workout)parent.getAdapter().getItem(position));
             }
         });
 
-
     }
 
+    private void startWorkout(Workout workout){
+        Intent intent = new Intent(this, startWorkoutActivity.class);
+        intent.putExtra("workout", workout);
+        startActivity(intent);
+    }
 
 
     @Override

@@ -1,8 +1,9 @@
 package com.audrius.myworkouts.myworkouts.models;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-public class Workout {
+public class Workout implements Serializable {
     private long id;
     private String name;
     private SimpleDateFormat time;
@@ -32,8 +33,6 @@ public class Workout {
     }
 
     @Override
-    public String toString(){
-        return name;
-    }
+    public String toString() { return name; }
 
 }

@@ -1,6 +1,5 @@
 package com.audrius.myworkouts.myworkouts;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -19,7 +17,6 @@ import com.audrius.myworkouts.myworkouts.db.WorkoutDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class newWorkoutActivity extends ActionBarActivity {
@@ -59,39 +56,29 @@ public class newWorkoutActivity extends ActionBarActivity {
         nameInput = (EditText)findViewById(R.id.title_input);
         nameInput.addTextChangedListener(textWatcher);
         checkFieldsForEmptyValues();
-        //exDatasource.dropDB();
         values = exDatasource.getAllUnassignedExercises();
 
         list = (ListView) findViewById(R.id.list);
         adapter = new ExerciseAdapter(this, values);
         list.setAdapter(adapter);
 
+        SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+            list, new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                @Override
+                public boolean canDismiss(int position) {
+                    return true;
+                }
 
-
-
-        // Create a ListView-specific touch listener. ListViews are given special treatment because
-        // by default they handle touches for their list items... i.e. they're in charge of drawing
-        // the pressed state (the list selector), handling list item clicks, etc.
-        SwipeDismissListViewTouchListener touchListener =
-                new SwipeDismissListViewTouchListener(
-                        list,
-                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                            @Override
-                            public boolean canDismiss(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-
-                                for (int position : reverseSortedPositions) {
-                                    Exercise exercise = values.get(position);
-                                    exDatasource.deleteExercise(exercise);
-                                }
-                                adapter.notifyDataSetChanged();
-                                onResume();
-                            }
-                        });
+                @Override
+                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                    for (int position : reverseSortedPositions) {
+                        Exercise exercise = values.get(position);
+                        exDatasource.deleteExercise(exercise);
+                    }
+                    adapter.notifyDataSetChanged();
+                    onResume();
+                }
+        });
         list.setOnTouchListener(touchListener);
         // Setting this scroll listener is required to ensure that during ListView scrolling,
         // we don't look for swipes.
@@ -130,13 +117,13 @@ public class newWorkoutActivity extends ActionBarActivity {
         exDatasource.open();
         workDatasource.open();
 
-        ArrayList<Exercise> values = exDatasource.getAllUnassignedExercises();
+        values = exDatasource.getAllUnassignedExercises();
 
 
 //        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this,
 //                R.layout.list_exercises, values);
-        ListView list = (ListView) findViewById(R.id.list);
-        ExerciseAdapter adapter = new ExerciseAdapter(this, values);
+        list = (ListView) findViewById(R.id.list);
+        adapter = new ExerciseAdapter(this, values);
         list.setAdapter(adapter);
         checkFieldsForEmptyValues();
         super.onResume();
@@ -156,6 +143,7 @@ public class newWorkoutActivity extends ActionBarActivity {
         workout.setName(titleInput.getText().toString());
         long last = workDatasource.createWorkout(workout);
         exDatasource.assignUnassignedExercises(last);
+        this.finish();
     }
 
     private void checkFieldsForEmptyValues(){

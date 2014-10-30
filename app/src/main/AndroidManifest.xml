@@ -25,6 +25,14 @@
             android:label="@string/title_activity_add_exercise"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name=".selectWorkoutActivity"
+            android:label="@string/title_activity_start_workout" >
+        </activity>
+        <activity
+            android:name=".startWorkoutActivity"
+            android:label="@string/title_activity_start_workout" >
+        </activity>
     </application>
 
 </manifest>

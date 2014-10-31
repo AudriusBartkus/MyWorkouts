@@ -1,10 +1,12 @@
 package com.audrius.myworkouts.myworkouts.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
@@ -12,7 +14,10 @@ import android.widget.TextView;
 
 import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
+import com.audrius.myworkouts.myworkouts.models.Set;
+import com.audrius.myworkouts.myworkouts.startWorkoutActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,17 +26,19 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     public Activity activity;
     public ArrayList<Exercise> exercise;
     public ArrayList<Object> set;
-    public ArrayList<String> tempChild;
+    public ArrayList<Set> tempChild;
     public LayoutInflater minflater;
     public HashMap<Integer, boolean[]> mChildCheckStates;
+    public Context context;
 
     public void setInflater(LayoutInflater mInflater, Activity act) {
         this.minflater = mInflater;
         activity = act;
     }
 
-    public WorkoutAdapter(ArrayList<Exercise> exercise, ArrayList<Object> set) {
+    public WorkoutAdapter(ArrayList<Exercise> exercise, ArrayList<Object> set, Context context) {
         this.exercise = exercise;
+        this.context = context;
         this.set = set;
         mChildCheckStates = new HashMap<Integer, boolean[]>();
     }
@@ -93,15 +100,20 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        tempChild = (ArrayList<String>) set.get(groupPosition);
+        tempChild = (ArrayList<Set>) set.get(groupPosition);
         final int mGroupPosition = groupPosition;
-        String childText = tempChild.get(childPosition);
+        String childText = tempChild.get(childPosition).toString();
         ChildViewHolder childViewHolder;
         if (convertView == null) {
             convertView = minflater.inflate(R.layout.childrow, null);
             childViewHolder = new ChildViewHolder();
+            ArrayList map = new ArrayList();
+            map.add(groupPosition);
+            map.add(childPosition);
             childViewHolder.mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox);
             childViewHolder.mChildText = (TextView)convertView.findViewById(R.id.textView2);
+            childViewHolder.mChildButton = (Button)convertView.findViewById(R.id.editButton);
+            childViewHolder.mChildButton.setTag(tempChild.get(childPosition));
             convertView.setTag(childViewHolder);
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
@@ -130,6 +142,12 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
                 }
             }
         });
+        childViewHolder.mChildButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((startWorkoutActivity)context).editSet(tempChild.get(childPosition));
+            }
+        });
         return convertView;
     }
     @Override
@@ -137,9 +155,10 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
-    public final class ChildViewHolder {
+    public final class ChildViewHolder{
         TextView mChildText;
         CheckBox mCheckBox;
+        Button mChildButton;
     }
 
 }

@@ -33,6 +33,11 @@
             android:name=".startWorkoutActivity"
             android:label="@string/title_activity_start_workout" >
         </activity>
+        <activity
+            android:name=".editSetActivity"
+            android:label="@string/title_activity_edit_set"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
 
 </manifest>

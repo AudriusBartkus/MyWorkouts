@@ -12,13 +12,22 @@
         android:paddingLeft="50dp"
         android:text="@string/hello_world"
         android:textSize="20sp"
-        android:layout_weight="0.80" />
+        android:layout_weight="0.80"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/editButton"
+        android:background="@android:drawable/ic_menu_edit"
+        android:onClick="onSetClick"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkBox"
-        android:checked="false"
-        android:background="#ffff3336" />
+        android:checked="false"/>
 
 </LinearLayout>

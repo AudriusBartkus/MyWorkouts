@@ -23,6 +23,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String WORKOUTS_TIME = "time";
 
 
+    public static final String TABLE_SETS = "sets";
+    public static final String SETS_ID = "_id";
+    public static final String SETS_WEIGHT = "weight";
+    public static final String SETS_REPS = "reps";
+    public static final String SETS_EXERCISE_ID = "exercise_id";
+
+
+
     private static final String DATABASE_NAME = "myWorkoutsDB";
     private static final int DATABASE_VERSION = 1;
 
@@ -37,10 +45,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         String query;
         query = "CREATE TABLE " + TABLE_EXERCISES + "( " + EXERCISES_ID + " INTEGER PRIMARY KEY, " + EXERCISES_NAME + " TEXT, " + EXERCISES_WEIGHT + " INTEGER, " + EXERCISES_SETS + " INTEGER, " + EXERCISES_REPS +" INTEGER, " + EXERCISES_WORKOUT_ID + " INTEGER)";
-        String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TIME)";
         database.execSQL(query);
+        String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TIME)";
         database.execSQL(workoutQuery);
-
+        query = "CREATE TABLE " + TABLE_SETS + "( " + SETS_ID + " INTEGER PRIMARY KEY, " + SETS_WEIGHT + " INTEGER, " + SETS_REPS + " INTEGER, " + SETS_EXERCISE_ID + " INTEGER)";
+        database.execSQL(query);
     }
 
 
@@ -51,6 +60,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKOUTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETS);
         onCreate(db);
     }
 

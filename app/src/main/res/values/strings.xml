@@ -29,5 +29,7 @@
     <string name="finish">Finish</string>
     <string name="start">Start</string>
     <string name="time">Time:</string>
-
+    <string name="title_activity_edit_set">Edit</string>
+    <string name="fix1">fix1</string>
+    <string name="fix2">fix2</string>
 </resources>

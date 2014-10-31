@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.audrius.myworkouts.myworkouts.R;
-import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 
 import java.util.ArrayList;
@@ -47,11 +46,9 @@ public class ExerciseAdapter extends BaseAdapter{
         ViewHolder view;
 
         if (rowView == null) {
-            // Get a new instance of the row layout view
             LayoutInflater inflater = activity.getLayoutInflater();
             rowView = inflater.inflate(R.layout.list_exercises, null);
 
-            // Hold the view objects in an object, that way the don't need to be "re-  finded"
             view = new ViewHolder();
             view.exercise_name = (TextView) rowView.findViewById(R.id.name_entry);
             view.description = (TextView) rowView.findViewById(R.id.description);

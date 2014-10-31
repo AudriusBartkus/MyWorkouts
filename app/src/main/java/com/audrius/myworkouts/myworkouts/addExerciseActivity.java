@@ -90,8 +90,6 @@ public class addExerciseActivity extends Activity {
     }
 
     public void save(View view){
-        // save exercise to the database
-        //TODO: refresh list
         Exercise exercise = new Exercise();
         EditText nameInput = (EditText)findViewById(R.id.nameInput);
         EditText weightInput = (EditText)findViewById(R.id.weightInput);

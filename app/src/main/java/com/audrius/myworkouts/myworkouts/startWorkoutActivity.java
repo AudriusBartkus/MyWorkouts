@@ -1,23 +1,65 @@
 package com.audrius.myworkouts.myworkouts;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.audrius.myworkouts.myworkouts.adapters.WorkoutAdapter;
+import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
+import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Workout;
+
+import java.util.ArrayList;
 
 
 public class startWorkoutActivity extends ActionBarActivity {
-    Workout workout;
+    private Workout workout;
+    private ExerciseDataSource datasource;
+    private ArrayList<Exercise> exercises;
+    private ArrayList<String> sets;
+    private ArrayList<Object> setList;
+    private ExpandableListView list;
+    private WorkoutAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_workout);
+        datasource = new ExerciseDataSource(this);
+        datasource.open();
+
         workout = (Workout)getIntent().getSerializableExtra("workout");
         TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(workout.getName());
+
+        exercises = datasource.getExercisesById(workout.getId());
+        setList = new ArrayList<Object>();
+        for(Exercise exercise : exercises){
+            sets = new ArrayList<String>();
+            for(int i = 0; i < exercise.getSets(); i++){
+                sets.add("Reps: " + String.valueOf(exercise.getReps()));
+            }
+            setList.add(sets);
+        }
+        Log.d("0", "cia?");
+        list = (ExpandableListView)findViewById(R.id.expandableListView);
+        Log.d("1", "cia?");
+        list.setGroupIndicator(null);
+        Log.d("2", "cia?");
+        list.setClickable(true);
+        Log.d("3", "cia?");
+        adapter = new WorkoutAdapter(exercises, setList);
+        Log.d("4", "cia?");
+        adapter.setInflater((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
+        Log.d("5", "cia?");
+        list.setAdapter(adapter);
+        Log.d("6", "cia?");
     }
 
 
@@ -39,4 +81,6 @@ public class startWorkoutActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

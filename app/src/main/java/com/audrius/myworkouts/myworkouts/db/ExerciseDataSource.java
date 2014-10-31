@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
 
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 
@@ -58,7 +59,6 @@ public class ExerciseDataSource {
             exercises.add(exercise);
             cursor.moveToNext();
         }
-        // make sure to close the cursor
         cursor.close();
         return exercises;
     }
@@ -66,6 +66,19 @@ public class ExerciseDataSource {
     public ArrayList<Exercise> getAllUnassignedExercises() {
         ArrayList<Exercise> exercises = new ArrayList<Exercise>();
         Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_EXERCISES + " WHERE " + MySQLiteHelper.EXERCISES_WORKOUT_ID + " = 0", null );
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Exercise exercise = cursorToExercise(cursor);
+            exercises.add(exercise);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return exercises;
+    }
+
+    public ArrayList<Exercise> getExercisesById(long id){
+        ArrayList<Exercise> exercises = new ArrayList<Exercise>();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_EXERCISES + " WHERE " + MySQLiteHelper.EXERCISES_WORKOUT_ID + " = " + (int)id, null );
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Exercise exercise = cursorToExercise(cursor);

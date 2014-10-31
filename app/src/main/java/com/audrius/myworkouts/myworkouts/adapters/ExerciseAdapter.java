@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 
@@ -16,7 +17,6 @@ import java.util.List;
 public class ExerciseAdapter extends BaseAdapter{
     private final Activity activity;
     private final List<Exercise> list;
-    private ExerciseDataSource datasource;
 
 
     @Override

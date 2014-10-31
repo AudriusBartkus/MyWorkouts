@@ -60,8 +60,8 @@ public class Exercise {
     }
 
     // Will be used by the ArrayAdapter in the ListView
-   /* @Override
+   @Override
     public String toString() {
-        return exercise;
-    }*/
+        return name;
+    }
 }

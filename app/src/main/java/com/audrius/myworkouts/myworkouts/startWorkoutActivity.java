@@ -47,19 +47,12 @@ public class startWorkoutActivity extends ActionBarActivity {
             }
             setList.add(sets);
         }
-        Log.d("0", "cia?");
         list = (ExpandableListView)findViewById(R.id.expandableListView);
-        Log.d("1", "cia?");
         list.setGroupIndicator(null);
-        Log.d("2", "cia?");
         list.setClickable(true);
-        Log.d("3", "cia?");
         adapter = new WorkoutAdapter(exercises, setList);
-        Log.d("4", "cia?");
         adapter.setInflater((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
-        Log.d("5", "cia?");
         list.setAdapter(adapter);
-        Log.d("6", "cia?");
     }
 
 

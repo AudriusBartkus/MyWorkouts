@@ -1,25 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="@android:color/black"
+    android:layout_height="match_parent"
     android:clickable="true"
-    android:orientation="vertical"
-    android:paddingLeft="40dp"
-    tools:context=".MainActivity" >
-     <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/hello_world"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+    tools:context=".MainActivity"
+    android:weightSum="1">
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:text="@string/hello_world"
+        android:textSize="20sp"
+        android:layout_weight="0.80" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/white" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        style="@android:style/Widget.Holo.CompoundButton.CheckBox" />
 
 </LinearLayout>

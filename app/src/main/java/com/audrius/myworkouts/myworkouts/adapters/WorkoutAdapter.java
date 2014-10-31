@@ -5,14 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @SuppressWarnings("unchecked")
 public class WorkoutAdapter extends BaseExpandableListAdapter {
@@ -21,6 +23,7 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     public ArrayList<Object> set;
     public ArrayList<String> tempChild;
     public LayoutInflater minflater;
+    public HashMap<Integer, boolean[]> mChildCheckStates;
 
     public void setInflater(LayoutInflater mInflater, Activity act) {
         this.minflater = mInflater;
@@ -30,6 +33,7 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     public WorkoutAdapter(ArrayList<Exercise> exercise, ArrayList<Object> set) {
         this.exercise = exercise;
         this.set = set;
+        mChildCheckStates = new HashMap<Integer, boolean[]>();
     }
 
     @Override
@@ -78,8 +82,7 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = minflater.inflate(R.layout.grouprow, null);
         }
@@ -89,20 +92,54 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         tempChild = (ArrayList<String>) set.get(groupPosition);
-
+        final int mGroupPosition = groupPosition;
+        String childText = tempChild.get(childPosition);
+        ChildViewHolder childViewHolder;
         if (convertView == null) {
             convertView = minflater.inflate(R.layout.childrow, null);
+            childViewHolder = new ChildViewHolder();
+            childViewHolder.mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+            childViewHolder.mChildText = (TextView)convertView.findViewById(R.id.textView2);
+            convertView.setTag(childViewHolder);
+        } else {
+            childViewHolder = (ChildViewHolder) convertView.getTag();
         }
-        TextView text = (TextView) convertView.findViewById(R.id.textView2);
-        text.setText(tempChild.get(childPosition));
+        childViewHolder.mChildText.setText(childText);
+        childViewHolder.mCheckBox.setOnCheckedChangeListener(null);
+        if (mChildCheckStates.containsKey(mGroupPosition)) {
+            boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
+            childViewHolder.mCheckBox.setChecked(getChecked[childPosition]);
+        } else {
+            boolean getChecked[] = new boolean[getChildrenCount(mGroupPosition)];
+            mChildCheckStates.put(mGroupPosition, getChecked);
+            childViewHolder.mCheckBox.setChecked(false);
+        }
+        childViewHolder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
+                    getChecked[childPosition] = true;
+                    mChildCheckStates.put(mGroupPosition, getChecked);
+                } else {
+                    boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
+                    getChecked[childPosition] = false;
+                    mChildCheckStates.put(mGroupPosition, getChecked);
+                }
+            }
+        });
         return convertView;
     }
     @Override
     public boolean isChildSelectable(int i, int i2) {
         return false;
+    }
+
+    public final class ChildViewHolder {
+        TextView mChildText;
+        CheckBox mCheckBox;
     }
 
 }

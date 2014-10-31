@@ -50,9 +50,9 @@
         android:layout_height="wrap_content"
         android:text="@string/finish"
         android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/expandableListView"
+        android:layout_alignEnd="@+id/expandableListView" />
 
     <ExpandableListView
         android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
         android:id="@+id/expandableListView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/button"
-        android:layout_below="@+id/chronometer" />
+        android:layout_below="@+id/chronometer"
+        android:layout_above="@+id/button" />
 
 </RelativeLayout>

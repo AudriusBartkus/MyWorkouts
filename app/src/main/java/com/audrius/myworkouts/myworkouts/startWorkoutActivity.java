@@ -1,12 +1,17 @@
 package com.audrius.myworkouts.myworkouts;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -26,6 +31,10 @@ public class startWorkoutActivity extends ActionBarActivity {
     private ArrayList<Object> setList;
     private ExpandableListView list;
     private WorkoutAdapter adapter;
+    private Chronometer chronometer;
+    private boolean started = false;
+    private long timeWhenStopped;
+    private Button startPauseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,9 @@ public class startWorkoutActivity extends ActionBarActivity {
         setContentView(R.layout.activity_start_workout);
         datasource = new ExerciseDataSource(this);
         datasource.open();
-
+        chronometer = (Chronometer)findViewById(R.id.chronometer);
+        timeWhenStopped = 0;
+        startPauseButton = (Button)findViewById(R.id.startButton);
         workout = (Workout)getIntent().getSerializableExtra("workout");
         TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(workout.getName());
@@ -43,7 +54,7 @@ public class startWorkoutActivity extends ActionBarActivity {
         for(Exercise exercise : exercises){
             sets = new ArrayList<String>();
             for(int i = 0; i < exercise.getSets(); i++){
-                sets.add("Reps: " + String.valueOf(exercise.getReps()));
+                sets.add("Reps: " + String.valueOf(exercise.getReps()) + " Weight: " + String.valueOf(exercise.getWeight()));
             }
             setList.add(sets);
         }
@@ -51,8 +62,24 @@ public class startWorkoutActivity extends ActionBarActivity {
         list.setGroupIndicator(null);
         list.setClickable(true);
         adapter = new WorkoutAdapter(exercises, setList);
-        adapter.setInflater((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
+        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
         list.setAdapter(adapter);
+
+    }
+
+    public void onClickSatrtPause(View view){
+
+        if (started == false){
+            chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+            chronometer.start();
+            startPauseButton.setBackgroundResource(R.drawable.ic_action_pause);
+            started = true;
+        } else {
+            timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
+            chronometer.stop();
+            startPauseButton.setBackgroundResource(R.drawable.ic_action_play);
+            started = false;
+        }
     }
 
 

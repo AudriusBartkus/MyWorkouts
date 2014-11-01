@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 public class Workout implements Serializable {
     private long id;
     private String name;
-    private SimpleDateFormat time;
+    private String time;
 
     public long getId() {
         return id;
@@ -24,15 +24,15 @@ public class Workout implements Serializable {
         this.name = name;
     }
 
-    public SimpleDateFormat getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(SimpleDateFormat time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
     @Override
-    public String toString() { return name; }
+    public String toString() { return name + time; }
 
 }

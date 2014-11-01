@@ -44,7 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/ic_action_play"
-        android:onClick="onClickSatrtPause"/>
+        android:onClick="onClickSartPause"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -54,7 +54,8 @@
         android:id="@+id/finishButton"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/expandableListView"
-        android:layout_alignEnd="@+id/expandableListView"/>
+        android:layout_alignEnd="@+id/expandableListView"
+        android:onClick="onFinishPressed"/>
 
     <ExpandableListView
         android:layout_width="wrap_content"

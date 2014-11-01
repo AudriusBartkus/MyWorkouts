@@ -20,7 +20,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_WORKOUTS = "workouts";
     public static final String WORKOUTS_ID = "_id";
     public static final String WORKOUTS_NAME = "name";
-    public static final String WORKOUTS_TIME = "time";
+    public static final String WORKOUTS_TIME = "timeDate";
 
 
     public static final String TABLE_SETS = "sets";
@@ -30,9 +30,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String SETS_EXERCISE_ID = "exercise_id";
 
 
-
     private static final String DATABASE_NAME = "myWorkoutsDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
 
     public MySQLiteHelper(Context context) {
@@ -46,7 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         String query;
         query = "CREATE TABLE " + TABLE_EXERCISES + "( " + EXERCISES_ID + " INTEGER PRIMARY KEY, " + EXERCISES_NAME + " TEXT, " + EXERCISES_WEIGHT + " INTEGER, " + EXERCISES_SETS + " INTEGER, " + EXERCISES_REPS +" INTEGER, " + EXERCISES_WORKOUT_ID + " INTEGER)";
         database.execSQL(query);
-        String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TIME)";
+        String workoutQuery = "CREATE TABLE " + TABLE_WORKOUTS + " ( " + WORKOUTS_ID + " INTEGER PRIMARY KEY, " + WORKOUTS_NAME + " TEXT, " + WORKOUTS_TIME + " TEXT)";
         database.execSQL(workoutQuery);
         query = "CREATE TABLE " + TABLE_SETS + "( " + SETS_ID + " INTEGER PRIMARY KEY, " + SETS_WEIGHT + " INTEGER, " + SETS_REPS + " INTEGER, " + SETS_EXERCISE_ID + " INTEGER)";
         database.execSQL(query);
@@ -62,6 +61,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKOUTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETS);
         onCreate(db);
+    }
+
+    public void dropDB(SQLiteDatabase db){
+        db.execSQL("DROP DATABASE " + DATABASE_NAME);
     }
 
 }

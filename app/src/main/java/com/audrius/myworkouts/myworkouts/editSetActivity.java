@@ -10,10 +10,14 @@ import android.widget.EditText;
 
 import com.audrius.myworkouts.myworkouts.models.Set;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class editSetActivity extends Activity {
     private EditText weightField;
     private EditText repsField;
+    private ArrayList<Object> setList;
     private Set set;
 
     @Override
@@ -23,12 +27,23 @@ public class editSetActivity extends Activity {
         weightField = (EditText)findViewById(R.id.editText);
         repsField = (EditText)findViewById(R.id.editText2);
         set = (Set)getIntent().getSerializableExtra("set");
+        setList = (ArrayList<Object>)getIntent().getSerializableExtra("setArray");
         weightField.setText(String.valueOf(set.getWeight()));
         repsField.setText(String.valueOf(set.getReps()));
     }
 
     public void save(View view){
-
+        for(Iterator<Object>i = setList.iterator(); i.hasNext();){
+            ArrayList<Set> tempSet = (ArrayList<Set>)i.next();
+            if (tempSet.contains(set)){
+                Set newSet = tempSet.get(tempSet.indexOf(set));
+                newSet.setWeight(Integer.parseInt(findViewById(R.id.editText).toString()));
+                newSet.setReps(Integer.parseInt(findViewById(R.id.editText2).toString()));
+                tempSet.set(tempSet.indexOf(set),newSet);
+                break;
+            }
+        }
+        this.finish();
     }
 
     @Override

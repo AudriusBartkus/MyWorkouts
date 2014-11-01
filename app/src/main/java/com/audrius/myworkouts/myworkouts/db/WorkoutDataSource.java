@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
@@ -28,10 +29,11 @@ public class WorkoutDataSource {
 
     public long createWorkout(Workout workout){
         ContentValues values = new ContentValues();
+       //
         values.put(MySQLiteHelper.WORKOUTS_NAME, workout.getName());
-      //  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-       // values.put(MySQLiteHelper.WORKOUTS_TIME, dateFormat.format(workout.getTime()));
-
+        if (workout.getTime() != null) {
+            values.put(MySQLiteHelper.WORKOUTS_TIME, workout.getTime());
+        }
         long last = database.insert(MySQLiteHelper.TABLE_WORKOUTS, null, values);
         return last;
     }
@@ -41,6 +43,7 @@ public class WorkoutDataSource {
         //TODO: check if id is assigned when creating a workout and exercise
         long id = workout.getId();
         database.delete(MySQLiteHelper.TABLE_WORKOUTS, MySQLiteHelper.WORKOUTS_ID + " = " + id, null);
+        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.EXERCISES_WORKOUT_ID + " = " + id, null);
     }
 
     public ArrayList<Workout> getAllWorkouts(){
@@ -60,9 +63,7 @@ public class WorkoutDataSource {
         Workout workout = new Workout();
         workout.setId(cursor.getLong(0));
         workout.setName(cursor.getString(1));
-        //TODO: finish time inserts and gets
-       // SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-       // workout.setTime(dateFormat.parse(cursor.get(2)));
+        workout.setTime(cursor.getString(2));
         return workout;
     }
 

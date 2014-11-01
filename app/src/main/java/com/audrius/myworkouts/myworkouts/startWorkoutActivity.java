@@ -1,10 +1,12 @@
 package com.audrius.myworkouts.myworkouts;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ExpandableListActivity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
@@ -23,11 +25,14 @@ import android.widget.TextView;
 import com.audrius.myworkouts.myworkouts.adapters.WorkoutAdapter;
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.db.SetDataSource;
+import com.audrius.myworkouts.myworkouts.db.WorkoutDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Set;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -35,7 +40,9 @@ public class startWorkoutActivity extends ActionBarActivity {
     private Workout workout;
     private Set set;
     private ExerciseDataSource datasource;
+    private WorkoutDataSource workoutDatasource;
     private SetDataSource setDatasource;
+    private ExerciseDataSource exerciseDataSource;
     private ArrayList<Exercise> exercises;
     private ArrayList<Set> sets;
     private ArrayList<Object> setList;
@@ -53,6 +60,12 @@ public class startWorkoutActivity extends ActionBarActivity {
         setContentView(R.layout.activity_start_workout);
         datasource = new ExerciseDataSource(this);
         datasource.open();
+        workoutDatasource = new WorkoutDataSource(this);
+        workoutDatasource.open();
+        exerciseDataSource = new ExerciseDataSource(this);
+        exerciseDataSource.open();
+        setDatasource = new SetDataSource(this);
+        setDatasource.open();
         chronometer = (Chronometer)findViewById(R.id.chronometer);
         timeWhenStopped = 0;
         startPauseButton = (Button)findViewById(R.id.startButton);
@@ -107,11 +120,12 @@ public class startWorkoutActivity extends ActionBarActivity {
     public void editSet(Set set){
         Intent intent = new Intent(this, editSetActivity.class);
         intent.putExtra("set", set);
+        intent.putExtra("setArray", setList);
         startActivity(intent);
 
     }
 
-    public void onClickSatrtPause(View view){
+    public void onClickSartPause(View view){
 
         if (!started){
             chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
@@ -129,12 +143,61 @@ public class startWorkoutActivity extends ActionBarActivity {
     public void onSetClick(View view){
         Intent intent = new Intent(this, editSetActivity.class);
         set = (Set)view.getTag();
-        Log.d("------------", set.toString());
         intent.putExtra("set", set);
         //intent.putExtra("array", )
         startActivity(intent);
     }
 
+    public void saveWorkout(){
+        Workout newWorkout = workout;
+        java.util.Date dt = new java.util.Date();
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+
+//  Set time fields to zero
+        String chronoText = chronometer.getText().toString();
+        String array[] = chronoText.split(":");
+        if(array.length == 2){
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE,Integer.parseInt(array[0]));
+            cal.set(Calendar.SECOND, Integer.parseInt(array[1]));
+            cal.set(Calendar.MILLISECOND, 0);
+        } else if(array.length == 3) {
+            cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(array[0]));
+            cal.set(Calendar.MINUTE,Integer.parseInt(array[1]));
+            cal.set(Calendar.SECOND, Integer.parseInt(array[2]));
+            cal.set(Calendar.MILLISECOND, 0);
+        } else {
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+        }
+        dt = cal.getTime();
+
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(dt);
+        newWorkout.setTime(currentTime);
+        long newWorkoutId;
+        newWorkoutId = workoutDatasource.createWorkout(newWorkout);
+
+        Exercise tempEx;
+        for (int u = 0; u < exercises.size(); u++){
+            tempEx = exercises.get(u);
+            tempEx.setWorkout_id(newWorkoutId);
+            long newExId = exerciseDataSource.createExercise(tempEx);
+            ArrayList<Set> tempSetList = (ArrayList<Set>)setList.get(u);
+            for (int i = 0; i< tempEx.getSets(); i++){
+                Set tempSet = tempSetList.get(i);
+                tempSet.setExerciseId(newExId);
+                setDatasource.createSet(tempSet);
+            }
+        }
+
+        this.finish();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -154,5 +217,58 @@ public class startWorkoutActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog diaBox = AskOption();
+        diaBox.show();
+    }
+
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure you want to exit?")
+
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
+    }
+    public void onFinishPressed(View view){
+        AlertDialog dialog = confirmFinish();
+        dialog.show();
+    }
+
+    public AlertDialog confirmFinish()
+    {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                .setTitle("End Workout")
+                .setMessage("Are you sure you want to end workout?")
+
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        saveWorkout();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
+    }
+
 
 }

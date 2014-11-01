@@ -33,5 +33,11 @@
     <string name="title_activity_statistics">Statistics</string>
     <string name="finished_workouts">Finished Workouts</string>
     <string name="title_activity_workout_statistics">workoutStatisticsActivity</string>
-
+    <string name="end_workout">End Workout</string>
+    <string name="end_workout_question">Are you sure you want to end workout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit">Exit</string>
+    <string name="exit_question">Are you sure you want to exit?</string>
+    <string name="about_message">Created by Audrius Bartkus</string>
 </resources>

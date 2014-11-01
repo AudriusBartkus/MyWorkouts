@@ -220,15 +220,15 @@ public class startWorkoutActivity extends ActionBarActivity {
     private AlertDialog AskOption()
     {
         AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
-                .setTitle("Exit")
-                .setMessage("Are you sure you want to exit?")
+                .setTitle(R.string.exit)
+                .setMessage(R.string.exit_question)
 
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -245,15 +245,15 @@ public class startWorkoutActivity extends ActionBarActivity {
     public AlertDialog confirmFinish()
     {
         AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
-                .setTitle("End Workout")
-                .setMessage("Are you sure you want to end workout?")
+                .setTitle(R.string.end_workout)
+                .setMessage(R.string.end_workout_question)
 
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         saveWorkout();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

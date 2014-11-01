@@ -1,5 +1,7 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -51,5 +53,18 @@ public class mainActivity extends ActionBarActivity {
     public void openStatistics(View view){
         Intent intent = new Intent(this, statisticsActivity.class);
         startActivity(intent);
+    }
+
+    public void showAbout(View view){
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(R.string.about);
+        alertDialog.setMessage("Created by: Audrius Bartkus");
+
+        alertDialog.setButton(-3,"OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.show();
     }
 }

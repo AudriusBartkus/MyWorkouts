@@ -39,7 +39,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onCreate(SQLiteDatabase database) {
         String query;
@@ -61,10 +60,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKOUTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETS);
         onCreate(db);
-    }
-
-    public void dropDB(SQLiteDatabase db){
-        db.execSQL("DROP DATABASE " + DATABASE_NAME);
     }
 
 }

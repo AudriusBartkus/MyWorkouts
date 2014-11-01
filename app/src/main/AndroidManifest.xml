@@ -37,21 +37,22 @@
         <activity
             android:name=".activities.startWorkoutActivity"
             android:label="@string/title_activity_start_workout"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.editSetActivity"
             android:label="@string/title_activity_edit_set"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.statisticsActivity"
-            android:label="@string/title_activity_statistics" >
+            android:label="@string/title_activity_statistics"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.workoutStatisticsActivity"
-            android:label="@string/title_activity_workout_statistics" >
+            android:label="@string/title_activity_workout_statistics"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

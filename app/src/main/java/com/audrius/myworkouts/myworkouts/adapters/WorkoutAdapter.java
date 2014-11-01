@@ -98,7 +98,7 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         tempChild = (ArrayList<Set>) set.get(groupPosition);
         final int mGroupPosition = groupPosition;
         String childText = tempChild.get(childPosition).toString();
@@ -106,9 +106,6 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = minflater.inflate(R.layout.childrow, null);
             childViewHolder = new ChildViewHolder();
-            ArrayList map = new ArrayList();
-            map.add(groupPosition);
-            map.add(childPosition);
             childViewHolder.mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox);
             childViewHolder.mChildText = (TextView)convertView.findViewById(R.id.textView2);
             childViewHolder.mChildButton = (Button)convertView.findViewById(R.id.editButton);
@@ -130,21 +127,21 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
         childViewHolder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ArrayList<Set> tempSetList = (ArrayList<Set>)set.get(groupPosition);
+                Set temp = tempSetList.get(childPosition);
                 if (isChecked) {
                     boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
                     getChecked[childPosition] = true;
+                    temp.setSelected(true);
+                    tempSetList.set(childPosition, temp);
                     mChildCheckStates.put(mGroupPosition, getChecked);
                 } else {
                     boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
                     getChecked[childPosition] = false;
+                    temp.setSelected(false);
+                    tempSetList.set(childPosition, temp);
                     mChildCheckStates.put(mGroupPosition, getChecked);
                 }
-            }
-        });
-        childViewHolder.mChildButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((startWorkoutActivity)context).editSet(tempChild.get(childPosition));
             }
         });
         return convertView;
@@ -160,4 +157,9 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
         Button mChildButton;
     }
 
+    public boolean isSelected(int group, int child){
+        ArrayList<Set> tempSetList = (ArrayList<Set>)set.get(group);
+        Set temp = tempSetList.get(child);
+        return temp.isSelected();
+    }
 }

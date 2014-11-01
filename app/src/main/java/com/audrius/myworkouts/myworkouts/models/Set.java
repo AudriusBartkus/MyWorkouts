@@ -10,6 +10,15 @@ public class Set implements Serializable {
     private int reps;
     private int weight;
     private long exerciseId;
+    private boolean selected = false;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public long getId() {
         return id;

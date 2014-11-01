@@ -1,8 +1,10 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +20,9 @@ import java.util.Iterator;
 public class editSetActivity extends Activity {
     private EditText weightField;
     private EditText repsField;
-    private ArrayList<Object> setList;
     private Set set;
+    private int groupPosition;
+    private int childPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +30,34 @@ public class editSetActivity extends Activity {
         setContentView(R.layout.activity_edit_set);
         weightField = (EditText)findViewById(R.id.editText);
         repsField = (EditText)findViewById(R.id.editText2);
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            return;
+        }
+
         set = (Set)getIntent().getSerializableExtra("set");
-        setList = (ArrayList<Object>)getIntent().getSerializableExtra("setArray");
+        groupPosition = extras.getInt("groupPosition");
+        childPosition = extras.getInt("childPosition");
         weightField.setText(String.valueOf(set.getWeight()));
         repsField.setText(String.valueOf(set.getReps()));
     }
 
     public void save(View view){
-        for(Iterator<Object>i = setList.iterator(); i.hasNext();){
-            ArrayList<Set> tempSet = (ArrayList<Set>)i.next();
-            if (tempSet.contains(set)){
-                Set newSet = tempSet.get(tempSet.indexOf(set));
-                newSet.setWeight(Integer.parseInt(findViewById(R.id.editText).toString()));
-                newSet.setReps(Integer.parseInt(findViewById(R.id.editText2).toString()));
-                tempSet.set(tempSet.indexOf(set),newSet);
-                break;
-            }
-        }
-        this.finish();
+
+        Set newSet = new Set();
+        EditText editText = (EditText)findViewById(R.id.editText);
+        newSet.setWeight(Integer.parseInt(editText.getText().toString()));
+        editText = (EditText)findViewById(R.id.editText2);
+        newSet.setReps(Integer.parseInt(editText.getText().toString()));
+        Intent intent = new Intent();
+        intent.putExtra("set", newSet);
+        intent.putExtra("groupPosition", groupPosition);
+        intent.putExtra("childPosition", childPosition);
+
+        setResult(RESULT_OK, intent);
+        Log.d("cia", "------");
+
+        finish();
     }
 
     @Override

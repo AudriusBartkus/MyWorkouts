@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +47,7 @@ public class startWorkoutActivity extends ActionBarActivity {
     private long timeWhenStopped;
     private Button startPauseButton;
     private static int prev = -1;
+    static final int EDIT_RESPONSE = 01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,7 @@ public class startWorkoutActivity extends ActionBarActivity {
         list.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                editSet((Set)parent.getAdapter().getItem(childPosition));
+                editSet((Set)parent.getAdapter().getItem(childPosition), groupPosition, childPosition);
                 return true;
             }
         });
@@ -110,12 +112,31 @@ public class startWorkoutActivity extends ActionBarActivity {
 
     }
 
-    public void editSet(Set set){
+    public void editSet(Set set, int groupPosition, int childPosition){
         Intent intent = new Intent(this, editSetActivity.class);
         intent.putExtra("set", set);
-        intent.putExtra("setArray", setList);
-        startActivity(intent);
+        intent.putExtra("groupPosition", groupPosition);
+        intent.putExtra("childPosition", childPosition);
+        startActivityForResult(intent, EDIT_RESPONSE);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("Ateina", "*************");
+        Log.e("d", "ds");
+        if (requestCode == EDIT_RESPONSE) {
+            if (resultCode == RESULT_OK) {
+
+                Set newSet = (Set)data.getSerializableExtra("set");
+                int groupPos = (Integer)data.getSerializableExtra("groupPosition");
+                int childPos = (Integer)data.getSerializableExtra("childPosition");
+                Log.d(String.valueOf(groupPos), String.valueOf(childPos));
+                ArrayList<Set> tempSet = (ArrayList<Set>)setList.get(groupPos);
+                tempSet.set(childPos, newSet);
+                setList.set(groupPos, tempSet);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     public void onClickSartPause(View view){
@@ -148,7 +169,6 @@ public class startWorkoutActivity extends ActionBarActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
 
-//  Set time fields to zero
         String chronoText = chronometer.getText().toString();
         String array[] = chronoText.split(":");
         if(array.length == 2){
@@ -181,10 +201,14 @@ public class startWorkoutActivity extends ActionBarActivity {
             tempEx.setWorkout_id(newWorkoutId);
             long newExId = exerciseDataSource.createExercise(tempEx);
             ArrayList<Set> tempSetList = (ArrayList<Set>)setList.get(u);
-            for (int i = 0; i< tempEx.getSets(); i++){
+            for (int i = 0; i< tempSetList.size(); i++){
                 Set tempSet = tempSetList.get(i);
-                tempSet.setExerciseId(newExId);
-                setDatasource.createSet(tempSet);
+                if(tempSet.isSelected()){
+
+                    tempSet.setExerciseId(newExId);
+                    setDatasource.createSet(tempSet);
+                }
+
             }
         }
 

@@ -15,9 +15,8 @@ import android.widget.TextView;
 import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Set;
-import com.audrius.myworkouts.myworkouts.startWorkoutActivity;
+import com.audrius.myworkouts.myworkouts.activities.startWorkoutActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 

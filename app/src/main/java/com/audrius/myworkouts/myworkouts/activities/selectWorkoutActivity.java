@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,9 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.audrius.myworkouts.myworkouts.R;
+import com.audrius.myworkouts.myworkouts.SwipeDismissListViewTouchListener;
 import com.audrius.myworkouts.myworkouts.db.WorkoutDataSource;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 

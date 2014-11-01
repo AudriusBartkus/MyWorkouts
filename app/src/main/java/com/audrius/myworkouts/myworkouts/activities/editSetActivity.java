@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Set;
 
 import java.util.ArrayList;

@@ -1,18 +1,12 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ExpandableListActivity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +16,7 @@ import android.widget.Chronometer;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.adapters.WorkoutAdapter;
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.db.SetDataSource;
@@ -30,10 +25,8 @@ import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Set;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 
 
 public class startWorkoutActivity extends ActionBarActivity {

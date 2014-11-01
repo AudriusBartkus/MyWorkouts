@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 

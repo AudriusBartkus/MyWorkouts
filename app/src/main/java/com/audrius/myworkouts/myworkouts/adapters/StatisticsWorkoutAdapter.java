@@ -6,20 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Set;
-import com.audrius.myworkouts.myworkouts.startWorkoutActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @SuppressWarnings("unchecked")
 public class StatisticsWorkoutAdapter extends BaseExpandableListAdapter {

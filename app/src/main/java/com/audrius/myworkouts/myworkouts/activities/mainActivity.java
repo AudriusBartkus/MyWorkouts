@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
 
-import com.audrius.myworkouts.myworkouts.db.MySQLiteHelper;
+import com.audrius.myworkouts.myworkouts.R;
 
 
 public class mainActivity extends ActionBarActivity {

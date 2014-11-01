@@ -9,7 +9,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".mainActivity"
+            android:name=".activities.mainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -19,38 +19,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".newWorkoutActivity"
+            android:name=".activities.newWorkoutActivity"
             android:label="@string/title_activity_new_workout"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".addExerciseActivity"
+            android:name=".activities.addExerciseActivity"
             android:label="@string/title_activity_add_exercise"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
-            android:name=".selectWorkoutActivity"
+            android:name=".activities.selectWorkoutActivity"
             android:label="@string/title_activity_start_workout"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".startWorkoutActivity"
+            android:name=".activities.startWorkoutActivity"
             android:label="@string/title_activity_start_workout"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".editSetActivity"
+            android:name=".activities.editSetActivity"
             android:label="@string/title_activity_edit_set"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
-            android:name=".statisticsActivity"
+            android:name=".activities.statisticsActivity"
             android:label="@string/title_activity_statistics" >
         </activity>
         <activity
-            android:name=".workoutStatisticsActivity"
+            android:name=".activities.workoutStatisticsActivity"
             android:label="@string/title_activity_workout_statistics" >
         </activity>
     </application>

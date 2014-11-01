@@ -1,4 +1,4 @@
-package com.audrius.myworkouts.myworkouts;
+package com.audrius.myworkouts.myworkouts.activities;
 
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.adapters.StatisticsWorkoutAdapter;
 import com.audrius.myworkouts.myworkouts.adapters.WorkoutAdapter;
 import com.audrius.myworkouts.myworkouts.db.ExerciseDataSource;

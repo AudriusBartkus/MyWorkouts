@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/weight_unit"
-        android:id="@+id/textView3"
+        android:id="@+id/dateTextView"
         android:layout_toEndOf="@+id/editText"
         android:textSize="24dp"
         android:layout_alignParentTop="true"

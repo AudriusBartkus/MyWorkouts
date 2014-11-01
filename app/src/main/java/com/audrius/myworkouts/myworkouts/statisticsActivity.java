@@ -9,19 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.audrius.myworkouts.myworkouts.db.WorkoutDataSource;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
-
-
 import java.util.ArrayList;
 
 
-public class selectWorkoutActivity extends ActionBarActivity {
+public class statisticsActivity extends ActionBarActivity {
     private WorkoutDataSource workDatasource;
     private ArrayList<Workout> values;
     private ArrayAdapter<Workout> adapter;
@@ -30,11 +25,11 @@ public class selectWorkoutActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_workout);
+        setContentView(R.layout.activity_statistics);
         workDatasource = new WorkoutDataSource(this);
         workDatasource.open();
         list = (ListView)findViewById(R.id.workoutsListView);
-        values = workDatasource.getWorkoutsWithoutDate();
+        values = workDatasource.getWorkoutsWithDate();
         adapter = new ArrayAdapter<Workout>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
         list.setAdapter(adapter);
@@ -57,16 +52,16 @@ public class selectWorkoutActivity extends ActionBarActivity {
         list.setOnTouchListener(touchListener);
         list.setOnScrollListener(touchListener.makeScrollListener());
 
-        list.setOnItemClickListener(new OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startWorkout((Workout)parent.getAdapter().getItem(position));
+                showWorkout((Workout)parent.getAdapter().getItem(position));
             }
         });
 
     }
 
-    private void startWorkout(Workout workout){
-        Intent intent = new Intent(this, startWorkoutActivity.class);
+    private void showWorkout(Workout workout){
+        Intent intent = new Intent(this, workoutStatisticsActivity.class);
         intent.putExtra("workout", workout);
         startActivity(intent);
     }
@@ -76,7 +71,7 @@ public class selectWorkoutActivity extends ActionBarActivity {
     protected void onResume(){
 
         workDatasource.open();
-        values = workDatasource.getWorkoutsWithoutDate();
+        values = workDatasource.getWorkoutsWithDate();
         list = (ListView)findViewById(R.id.workoutsListView);
         adapter = new ArrayAdapter<Workout>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
         list.setAdapter(adapter);

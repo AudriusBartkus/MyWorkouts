@@ -6,12 +6,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".mainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,29 +21,37 @@
         <activity
             android:name=".newWorkoutActivity"
             android:label="@string/title_activity_new_workout"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".addExerciseActivity"
             android:label="@string/title_activity_add_exercise"
-            android:theme="@android:style/Theme.Dialog"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name=".selectWorkoutActivity"
             android:label="@string/title_activity_start_workout"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".startWorkoutActivity"
             android:label="@string/title_activity_start_workout"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".editSetActivity"
             android:label="@string/title_activity_edit_set"
-            android:theme="@android:style/Theme.Dialog"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".statisticsActivity"
+            android:label="@string/title_activity_statistics" >
+        </activity>
+        <activity
+            android:name=".workoutStatisticsActivity"
+            android:label="@string/title_activity_workout_statistics" >
         </activity>
     </application>
 

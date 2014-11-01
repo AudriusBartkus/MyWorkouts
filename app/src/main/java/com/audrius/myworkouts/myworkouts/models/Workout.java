@@ -33,6 +33,12 @@ public class Workout implements Serializable {
     }
 
     @Override
-    public String toString() { return name + time; }
+    public String toString() {
+        if(time == null){
+            return name;
+        } else {
+            return time.substring(0,10) + "  " + name;
+        }
+    }
 
 }

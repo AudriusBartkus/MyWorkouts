@@ -30,6 +30,8 @@
     <string name="start">Start</string>
     <string name="time">Time:</string>
     <string name="title_activity_edit_set">Edit</string>
-    <string name="fix1">fix1</string>
-    <string name="fix2">fix2</string>
+    <string name="title_activity_statistics">Statistics</string>
+    <string name="finished_workouts">Finished Workouts</string>
+    <string name="title_activity_workout_statistics">workoutStatisticsActivity</string>
+
 </resources>

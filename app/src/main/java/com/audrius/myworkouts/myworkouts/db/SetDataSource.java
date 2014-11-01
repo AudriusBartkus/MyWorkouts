@@ -50,7 +50,7 @@ public class SetDataSource {
     }
 
     public Set getSetById(int id){
-        Cursor cursor = database.rawQuery("SELECT * FROM" + MySQLiteHelper.TABLE_SETS + "WHERE" + MySQLiteHelper.SETS_ID + " = " + id, null);
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_SETS + " WHERE " + MySQLiteHelper.SETS_ID + " = " + id, null);
         cursor.moveToFirst();
         Set set = cursorToSet(cursor);
         cursor.close();
@@ -59,7 +59,7 @@ public class SetDataSource {
 
     public ArrayList<Set> getSetsByExerciseId(long id){
         ArrayList<Set> sets = new ArrayList<Set>();
-        Cursor cursor = database.rawQuery("SELECT * FROM" + MySQLiteHelper.TABLE_SETS + "WHERE" + MySQLiteHelper.SETS_EXERCISE_ID + " = " + (int)id, null);
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_SETS + " WHERE " + MySQLiteHelper.SETS_EXERCISE_ID + " = " + (int)id, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Set set = cursorToSet(cursor);

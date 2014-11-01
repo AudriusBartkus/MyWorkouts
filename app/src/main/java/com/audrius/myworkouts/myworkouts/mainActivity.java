@@ -47,4 +47,9 @@ public class mainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, selectWorkoutActivity.class);
         startActivity(intent);
     }
+
+    public void openStatistics(View view){
+        Intent intent = new Intent(this, statisticsActivity.class);
+        startActivity(intent);
+    }
 }

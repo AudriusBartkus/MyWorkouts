@@ -59,6 +59,32 @@ public class WorkoutDataSource {
         return workouts;
     }
 
+    public ArrayList<Workout> getWorkoutsWithoutDate(){
+        ArrayList<Workout> workouts = new ArrayList<Workout>();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_WORKOUTS + " WHERE " + MySQLiteHelper.WORKOUTS_TIME + " IS NULL", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Workout workout = cursorToWorkout(cursor);
+            workouts.add(workout);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return workouts;
+    }
+
+    public ArrayList<Workout> getWorkoutsWithDate(){
+        ArrayList<Workout> workouts = new ArrayList<Workout>();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_WORKOUTS + " WHERE " + MySQLiteHelper.WORKOUTS_TIME + " IS NOT NULL", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Workout workout = cursorToWorkout(cursor);
+            workouts.add(workout);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return workouts;
+    }
+
     private Workout cursorToWorkout(Cursor cursor) {
         Workout workout = new Workout();
         workout.setId(cursor.getLong(0));

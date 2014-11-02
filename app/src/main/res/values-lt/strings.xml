@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyWorkouts</string>
+    <string name="hello_world">Labas pasauli!</string>
+    <string name="action_settings">Nustatymai</string>
+    <string name="menu">Meniu</string>
+    <string name="start_workout">Pradėti treniruotę</string>
+    <string name="new_workout">Nauja treniruotė</string>
+    <string name="statistics">Statistika</string>
+    <string name="about">Apie</string>
+    <string name="title_activity_new_workout">Nauja treniruotė</string>
+    <string name="title">Pavadinimas</string>
+    <string name="exercises">Pratimai</string>
+    <string name="new_exercise">Naujas pratimas</string>
+    <string name="add_new_exercise">Pridėti naują pratimą</string>
+    <string name="save">Išsaugoti</string>
+    <string name="save_workout">Išsaugoti treniruotę</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Vardas</string>
+    <string name="weight">Svoris</string>
+    <string name="weight_unit">kg</string>
+    <string name="sets">Priėjimai</string>
+    <string name="reps">Pakartojimai</string>
+    <string name="cancel">Atšaukti</string>
+    <string name="title_activity_add_exercise">Naujas pratimas</string>
+    <string name="title_activity_start_workout">Pradėti treniruotę</string>
+    <string name="select_workout">Pasirinkite treniruotę</string>
+    <string name="finish">Užbaigti</string>
+    <string name="start">Pradėti</string>
+    <string name="time">Laikas:</string>
+    <string name="title_activity_edit_set">Redaguoti</string>
+    <string name="title_activity_statistics">Statistika</string>
+    <string name="finished_workouts">Užbaigtos treniruotės</string>
+    <string name="title_activity_workout_statistics">Statistika</string>
+    <string name="end_workout">Baigti treniruotę</string>
+    <string name="end_workout_question">Ar tikrai norite užbaigti?</string>
+    <string name="yes">Taip</string>
+    <string name="no">Ne</string>
+    <string name="exit">Išeiti</string>
+    <string name="exit_question">Ar tikrai norite išeiti?</string>
+    <string name="about_message">Autorius: Audrius Bartkus</string>
+    <string name="settings">Nustatymai</string>
+    <string name="title_activity_settings">Nustatymai</string>
+    <string-array name="languages">
+        <item>Pasirinkite kalbą</item>
+        <item>Lietuvių</item>
+        <item>English</item>
+    </string-array>
+</resources>

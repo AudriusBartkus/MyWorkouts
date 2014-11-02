@@ -1,5 +1,6 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class startWorkoutActivity extends ActionBarActivity {
+public class startWorkoutActivity extends Activity {
     private Workout workout;
     private Set set;
     private ExerciseDataSource datasource;
@@ -47,7 +48,7 @@ public class startWorkoutActivity extends ActionBarActivity {
     private long timeWhenStopped;
     private Button startPauseButton;
     private static int prev = -1;
-    static final int EDIT_RESPONSE = 01;
+    static final int EDIT_RESPONSE = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,13 @@ public class startWorkoutActivity extends ActionBarActivity {
         });
 
     }
+
+    @Override
+    protected void onResume(){
+        //adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
 
     public void editSet(Set set, int groupPosition, int childPosition){
         Intent intent = new Intent(this, editSetActivity.class);

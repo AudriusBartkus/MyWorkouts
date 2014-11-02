@@ -1,5 +1,6 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import com.audrius.myworkouts.myworkouts.models.Workout;
 
 import java.util.ArrayList;
 
-public class newWorkoutActivity extends ActionBarActivity {
+public class newWorkoutActivity extends Activity {
     private ExerciseDataSource exDatasource;
     private WorkoutDataSource workDatasource;
     private ArrayList<Exercise> values;
@@ -88,6 +89,8 @@ public class newWorkoutActivity extends ActionBarActivity {
         list.setOnScrollListener(touchListener.makeScrollListener());
 
     }
+
+
 
 
     @Override

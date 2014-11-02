@@ -1,5 +1,6 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.audrius.myworkouts.myworkouts.models.Workout;
 import java.util.ArrayList;
 
 
-public class statisticsActivity extends ActionBarActivity {
+public class statisticsActivity extends Activity {
     private WorkoutDataSource workDatasource;
     private ArrayList<Workout> values;
     private ArrayAdapter<Workout> adapter;

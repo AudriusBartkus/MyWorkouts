@@ -1,9 +1,13 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -11,8 +15,10 @@ import android.view.View;
 
 import com.audrius.myworkouts.myworkouts.R;
 
+import java.util.Locale;
 
-public class mainActivity extends ActionBarActivity {
+
+public class mainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,8 @@ public class mainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, settingsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -67,4 +74,11 @@ public class mainActivity extends ActionBarActivity {
         });
         alertDialog.show();
     }
+
+    public void showSettings(View view){
+        Intent intent = new Intent(this, settingsActivity.class);
+        startActivity(intent);
+    }
+
+
 }

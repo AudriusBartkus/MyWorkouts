@@ -2,7 +2,6 @@ package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,9 +11,6 @@ import android.widget.EditText;
 
 import com.audrius.myworkouts.myworkouts.R;
 import com.audrius.myworkouts.myworkouts.models.Set;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 
 public class editSetActivity extends Activity {
@@ -34,7 +30,6 @@ public class editSetActivity extends Activity {
         if (extras == null) {
             return;
         }
-
         set = (Set)getIntent().getSerializableExtra("set");
         groupPosition = extras.getInt("groupPosition");
         childPosition = extras.getInt("childPosition");

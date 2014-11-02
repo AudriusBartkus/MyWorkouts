@@ -156,10 +156,4 @@ public class WorkoutAdapter extends BaseExpandableListAdapter {
         CheckBox mCheckBox;
         Button mChildButton;
     }
-
-    public boolean isSelected(int group, int child){
-        ArrayList<Set> tempSetList = (ArrayList<Set>)set.get(group);
-        Set temp = tempSetList.get(child);
-        return temp.isSelected();
-    }
 }

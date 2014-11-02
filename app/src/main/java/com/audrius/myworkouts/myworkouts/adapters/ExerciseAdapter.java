@@ -61,7 +61,7 @@ public class ExerciseAdapter extends BaseAdapter{
         /** Set data to your Views. */
         Exercise item = list.get(position);
         view.exercise_name.setText(item.getName());
-        view.description.setText(String.valueOf(item.getWeight()) + " kg     " + String.valueOf(item.getSets()) + "x" + String.valueOf(item.getReps())+ "     workout id: "+String.valueOf(item.getWorkout_id()) );
+        view.description.setText(String.valueOf(item.getWeight()) + " kg     " + String.valueOf(item.getSets()) + "x" + String.valueOf(item.getReps()));
         return rowView;
     }
 

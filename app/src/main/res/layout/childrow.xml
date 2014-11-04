@@ -12,6 +12,8 @@
         android:paddingLeft="50dp"
         android:text="@string/hello_world"
         android:textSize="20sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/pinkFade"
         android:layout_weight="0.80"
         android:focusable="true"
         android:focusableInTouchMode="true"/>
@@ -21,8 +23,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/editButton"
-        android:background="@android:drawable/ic_menu_edit"
-        android:onClick="onSetClick"/>
+        android:background="@android:drawable/ic_menu_edit"/>
 
     <CheckBox
         android:layout_width="wrap_content"

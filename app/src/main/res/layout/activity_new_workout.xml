@@ -17,7 +17,9 @@
         android:layout_height="wrap_content"
         android:text="@string/title"
         android:id="@+id/title"
-        android:textSize="30dp" />
+        android:textSize="24sp"
+        android:textColor="#3f51b5"
+        android:fontFamily="sans-serif-light"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,7 +29,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="#ff4081"
+        android:fontFamily="sans-serif-light"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,28 +41,29 @@
         android:layout_below="@+id/title_input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="30dp" />
+        android:textSize="24sp"
+        android:textColor="#3f51b5"
+        android:fontFamily="sans-serif-light"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_new_exercise"
-        android:id="@+id/startButton"
+        android:id="@+id/startPauseButton"
+        android:onClick="addExercise"
         android:layout_below="@+id/exercises"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="addExercise"/>
+        android:layout_centerHorizontal="true"
+        style="@style/customButton"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:id="@+id/list"
-        android:layout_below="@+id/startButton"
+        tools:listitem="list_example_entry"
+        android:layout_below="@+id/startPauseButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        tools:listitem="list_example_entry" />
+        android:layout_above="@+id/save_workout"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -66,7 +71,8 @@
         android:text="@string/save_workout"
         android:id="@+id/save_workout"
         android:onClick="save"
-        android:layout_below="@+id/list"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/customButton"/>
 
 </RelativeLayout>

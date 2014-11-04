@@ -9,51 +9,89 @@
     tools:context=".mainActivity"
     android:orientation="vertical"
     android:windowSoftInputMode="stateHidden"
-    >
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:background="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/app_name"
+            android:fontFamily="sans-serif-light"
+            android:textSize="45sp"
+            android:textColor="#303f9f"
+            android:id="@+id/textView4" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/start_workout"
         android:layout_margin="10dp"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:text="@string/start_workout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="openStartWorkout"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#3f51b5"
         />
 
 
     <Button
         android:layout_margin="10dp"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:text="@string/new_workout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="openNewWorkout"/>
+        android:onClick="openNewWorkout"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#3f51b5"/>
 
     <Button
         android:layout_margin="10dp"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:text="@string/statistics"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="openStatistics"/>
+        android:onClick="openStatistics"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#3f51b5"/>
 
     <Button
         android:layout_margin="10dp"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:text="@string/settings"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="showSettings"
-        android:id="@+id/showSettings" />
+        android:id="@+id/showSettings"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#3f51b5"/>
 
     <Button
         android:layout_margin="10dp"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:text="@string/about"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="showAbout"/>
+        android:onClick="showAbout"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#3f51b5"/>
 
 
 </LinearLayout>

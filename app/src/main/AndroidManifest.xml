@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.audrius.myworkouts.myworkouts" >
+    package="com.audrius.myworkouts.myworkouts"
+    >
 
     <application
         android:allowBackup="true"
@@ -27,7 +28,7 @@
             android:name=".activities.addExerciseActivity"
             android:label="@string/title_activity_add_exercise"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/window" >
         </activity>
         <activity
             android:name=".activities.selectWorkoutActivity"
@@ -42,7 +43,8 @@
         <activity
             android:name=".activities.editSetActivity"
             android:label="@string/title_activity_edit_set"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name=".activities.statisticsActivity"

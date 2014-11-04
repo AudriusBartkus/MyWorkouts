@@ -2,6 +2,7 @@ package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -73,4 +74,7 @@ public class editSetActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

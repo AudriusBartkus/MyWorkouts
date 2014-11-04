@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ import java.util.Calendar;
 
 public class startWorkoutActivity extends Activity {
     private Workout workout;
-    private Set set;
     private ExerciseDataSource datasource;
     private WorkoutDataSource workoutDatasource;
     private SetDataSource setDatasource;
@@ -64,7 +62,7 @@ public class startWorkoutActivity extends Activity {
         setDatasource.open();
         chronometer = (Chronometer)findViewById(R.id.chronometer);
         timeWhenStopped = 0;
-        startPauseButton = (Button)findViewById(R.id.startButton);
+        startPauseButton = (Button)findViewById(R.id.startPauseButton);
         workout = (Workout)getIntent().getSerializableExtra("workout");
         TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(workout.getName());
@@ -79,7 +77,6 @@ public class startWorkoutActivity extends Activity {
                 tempSet.setWeight(exercise.getWeight());
                 tempSet.setReps(exercise.getReps());
                 tempSet.setExerciseId(exercise.getId());
-                //setDatasource.createSet(tempSet);
                 sets.add(tempSet);
             }
             setList.add(sets);
@@ -92,15 +89,6 @@ public class startWorkoutActivity extends Activity {
         adapter = new WorkoutAdapter(exercises, setList, this);
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
         list.setAdapter(adapter);
-
-        list.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                editSet((Set)parent.getAdapter().getItem(childPosition), groupPosition, childPosition);
-                return true;
-            }
-        });
-
         list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
@@ -113,11 +101,6 @@ public class startWorkoutActivity extends Activity {
 
     }
 
-    @Override
-    protected void onResume(){
-        //adapter.notifyDataSetChanged();
-        super.onResume();
-    }
 
 
     public void editSet(Set set, int groupPosition, int childPosition){
@@ -126,15 +109,13 @@ public class startWorkoutActivity extends Activity {
         intent.putExtra("groupPosition", groupPosition);
         intent.putExtra("childPosition", childPosition);
         startActivityForResult(intent, EDIT_RESPONSE);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Ateina", "*************");
-        Log.e("d", "ds");
         if (requestCode == EDIT_RESPONSE) {
             if (resultCode == RESULT_OK) {
-
                 Set newSet = (Set)data.getSerializableExtra("set");
                 int groupPos = (Integer)data.getSerializableExtra("groupPosition");
                 int childPos = (Integer)data.getSerializableExtra("childPosition");
@@ -162,13 +143,6 @@ public class startWorkoutActivity extends Activity {
         }
     }
 
-    public void onSetClick(View view){
-        Intent intent = new Intent(this, editSetActivity.class);
-        set = (Set)view.getTag();
-        intent.putExtra("set", set);
-        //intent.putExtra("array", )
-        startActivity(intent);
-    }
 
     public void saveWorkout(){
         Workout newWorkout = workout;
@@ -209,38 +183,26 @@ public class startWorkoutActivity extends Activity {
             tempEx.setWorkout_id(newWorkoutId);
             long newExId = exerciseDataSource.createExercise(tempEx);
             ArrayList<Set> tempSetList = (ArrayList<Set>)setList.get(u);
-            for (int i = 0; i< tempSetList.size(); i++){
-                Set tempSet = tempSetList.get(i);
-                if(tempSet.isSelected()){
-
+            for (Set tempSet : tempSetList) {
+                if (tempSet.isSelected()) {
                     tempSet.setExerciseId(newExId);
                     setDatasource.createSet(tempSet);
                 }
-
             }
         }
-
         this.finish();
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.start_workout, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -251,10 +213,9 @@ public class startWorkoutActivity extends Activity {
 
     private AlertDialog AskOption()
     {
-        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+        return new AlertDialog.Builder(this)
                 .setTitle(R.string.exit)
                 .setMessage(R.string.exit_question)
-
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         finish();
@@ -266,8 +227,6 @@ public class startWorkoutActivity extends Activity {
                     }
                 })
                 .create();
-        return myQuittingDialogBox;
-
     }
     public void onFinishPressed(View view){
         AlertDialog dialog = confirmFinish();
@@ -276,7 +235,7 @@ public class startWorkoutActivity extends Activity {
 
     public AlertDialog confirmFinish()
     {
-        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+        return new AlertDialog.Builder(this)
                 .setTitle(R.string.end_workout)
                 .setMessage(R.string.end_workout_question)
 
@@ -291,8 +250,6 @@ public class startWorkoutActivity extends Activity {
                     }
                 })
                 .create();
-        return myQuittingDialogBox;
-
     }
 
 

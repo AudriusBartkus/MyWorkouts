@@ -4,6 +4,7 @@
     android:layout_height="250dp"
     tools:context="com.audrius.myworkouts.myworkouts.activities.addExerciseActivity"
     android:windowSoftInputMode="stateHidden"
+    style="@style/window"
 
     >
 
@@ -16,7 +17,8 @@
         android:id="@+id/timeText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:fontFamily="Robit"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,7 +29,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColor="#ff4081"/>
 
     <Button
         android:layout_width="100dp"
@@ -37,65 +40,77 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
-        android:onClick="save"/>
+        android:onClick="save"
+        style="@style/customButton"/>
 
     <TextView
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/weight"
         android:id="@+id/weight"
         android:layout_below="@+id/nameInput"
-        android:layout_alignLeft="@+id/timeText"
-        android:layout_alignStart="@+id/timeText"/>
+        android:layout_alignLeft="@+id/sets"
+        android:layout_alignStart="@+id/sets"
+        android:layout_marginTop="15sp"
+        android:layout_above="@+id/sets"/>
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/weightInput"
+        android:textColor="#ff4081"
         android:layout_below="@+id/nameInput"
-        android:layout_alignLeft="@+id/save_exercise"
-        android:layout_alignStart="@+id/save_exercise" />
+        android:layout_toLeftOf="@+id/textView4"
+        android:layout_toStartOf="@+id/textView4"
+        android:layout_marginTop="5sp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/sets"
         android:id="@+id/sets"
-        android:layout_below="@+id/weight"
-        android:layout_alignLeft="@+id/weight"
-        android:layout_alignStart="@+id/weight"/>
+        android:layout_alignTop="@+id/setsInput"
+        android:layout_alignLeft="@+id/reps"
+        android:layout_alignStart="@+id/reps"
+        android:layout_above="@+id/reps"
+        android:layout_marginTop="5sp" />
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/setsInput"
-        android:layout_above="@+id/repsInput"
+        android:textColor="#ff4081"
+        android:layout_below="@+id/weightInput"
         android:layout_alignLeft="@+id/weightInput"
         android:layout_alignStart="@+id/weightInput" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/reps"
         android:id="@+id/reps"
-        android:layout_below="@+id/sets"
-        android:layout_alignLeft="@+id/sets"
-        android:layout_alignStart="@+id/sets" />
+        android:layout_toStartOf="@+id/nameInput"
+        android:layout_below="@+id/setsInput"
+        android:layout_marginTop="5sp"
+        android:layout_alignBottom="@+id/repsInput"
+        android:layout_alignRight="@+id/timeText"
+        android:layout_alignEnd="@+id/timeText" />
 
     <EditText
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/repsInput"
-        android:layout_alignTop="@+id/reps"
+        android:textColor="#ff4081"
+        android:layout_below="@+id/setsInput"
         android:layout_alignLeft="@+id/setsInput"
         android:layout_alignStart="@+id/setsInput" />
 
@@ -105,8 +120,10 @@
         android:text="@string/weight_unit"
         android:textSize="20sp"
         android:id="@+id/textView4"
-        android:layout_toEndOf="@+id/weightInput"
-        android:layout_alignTop="@+id/weightInput"
-        android:layout_toRightOf="@+id/weightInput" />
+        android:layout_below="@+id/nameInput"
+        android:layout_alignRight="@+id/nameInput"
+        android:layout_alignEnd="@+id/nameInput"
+        android:layout_marginRight="16sp"
+        android:layout_marginTop="15sp" />
 
 </RelativeLayout>

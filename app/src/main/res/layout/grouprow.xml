@@ -9,4 +9,5 @@
     android:padding="10dp"
     android:textSelectHandleLeft="@string/hello_world"
     android:textSize="24sp"
-    android:textColor="#1E1E1E"/>
+    android:fontFamily="sans-serif-thin"
+    android:textColor="@color/pink"/>

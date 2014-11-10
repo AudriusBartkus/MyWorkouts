@@ -28,7 +28,6 @@
 
         android:fontFamily="sans-serif-bold"
         android:textSize="24sp"
-        android:textColor="@color/pink"
-        style="@style/listView"/>
+        android:textColor="@color/pink"/>
 
 </RelativeLayout>

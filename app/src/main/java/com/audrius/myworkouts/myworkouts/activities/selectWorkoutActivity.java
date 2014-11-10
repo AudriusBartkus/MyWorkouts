@@ -1,9 +1,11 @@
 package com.audrius.myworkouts.myworkouts.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,6 +72,7 @@ public class selectWorkoutActivity extends Activity {
         Intent intent = new Intent(this, startWorkoutActivity.class);
         intent.putExtra("workout", workout);
         startActivity(intent);
+        this.finish();
     }
 
 

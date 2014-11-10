@@ -33,7 +33,7 @@
         android:textColor="#ff4081"/>
 
     <Button
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/save_exercise"
@@ -73,11 +73,9 @@
         android:textSize="20sp"
         android:text="@string/sets"
         android:id="@+id/sets"
-        android:layout_alignTop="@+id/setsInput"
+        android:layout_above="@+id/repsInput"
         android:layout_alignLeft="@+id/reps"
-        android:layout_alignStart="@+id/reps"
-        android:layout_above="@+id/reps"
-        android:layout_marginTop="5sp" />
+        android:layout_alignStart="@+id/reps" />
 
     <EditText
         android:layout_width="100dp"
@@ -96,12 +94,9 @@
         android:textSize="20sp"
         android:text="@string/reps"
         android:id="@+id/reps"
-        android:layout_toStartOf="@+id/nameInput"
-        android:layout_below="@+id/setsInput"
-        android:layout_marginTop="5sp"
         android:layout_alignBottom="@+id/repsInput"
-        android:layout_alignRight="@+id/timeText"
-        android:layout_alignEnd="@+id/timeText" />
+        android:layout_alignLeft="@+id/timeText"
+        android:layout_alignStart="@+id/timeText" />
 
     <EditText
         android:layout_width="100dp"

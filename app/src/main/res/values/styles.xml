@@ -24,10 +24,5 @@
         <item name="android:textSize">24sp</item>
         <item name="android:fontFamily">sans-serif-bold</item>
     </style>
-    <style name="listView" parent="android:style/Widget.AbsListView">
-        <item name="android:textColor">@color/pink</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">sans-serif-thin</item>
-    </style>
 
 </resources>

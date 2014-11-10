@@ -59,7 +59,7 @@
         <activity
             android:name=".activities.settingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@style/window">
         </activity>
     </application>
 

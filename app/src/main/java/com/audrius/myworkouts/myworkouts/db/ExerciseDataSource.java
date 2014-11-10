@@ -46,8 +46,7 @@ public class ExerciseDataSource {
 
     public void deleteExercise(Exercise exercise) {
         long id = exercise.getId();
-        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.EXERCISES_ID
-                + " = " + id, null);
+        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.EXERCISES_ID + " = " + id, null);
         database.delete(MySQLiteHelper.TABLE_SETS, MySQLiteHelper.SETS_EXERCISE_ID + " = " + id, null);
     }
 
@@ -90,17 +89,6 @@ public class ExerciseDataSource {
         cursor.close();
         return exercises;
     }
-
-//
-//    public void dropDB(){
-//        database.execSQL("DROP TABLE IF EXISTS " + MySQLiteHelper.TABLE_EXERCISES);
-//        database.execSQL("DROP TABLE IF EXISTS " + MySQLiteHelper.TABLE_WORKOUTS);
-//        String query;
-//        query = "CREATE TABLE " + MySQLiteHelper.TABLE_EXERCISES + "( " + MySQLiteHelper.EXERCISES_ID + " INTEGER PRIMARY KEY, " + MySQLiteHelper.EXERCISES_NAME + " TEXT, " + MySQLiteHelper.EXERCISES_WEIGHT + " INTEGER, " + MySQLiteHelper.EXERCISES_SETS + " INTEGER, " + MySQLiteHelper.EXERCISES_REPS +" INTEGER, " + MySQLiteHelper.EXERCISES_WORKOUT_ID + " INTEGER)";
-//        String workoutQuery = "CREATE TABLE " + MySQLiteHelper.TABLE_WORKOUTS + "(_id INTEGER PRIMARY KEY, name TEXT, time TEXT)";
-//        database.execSQL(query);
-//        database.execSQL(workoutQuery);
-//    }
 
     public void assignUnassignedExercises(long id) {
         Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_EXERCISES + " WHERE " + MySQLiteHelper.EXERCISES_WORKOUT_ID + " = 0", null );

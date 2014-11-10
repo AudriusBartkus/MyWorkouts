@@ -20,6 +20,7 @@ public class editSetActivity extends Activity {
     private Set set;
     private int groupPosition;
     private int childPosition;
+    private boolean isSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class editSetActivity extends Activity {
         set = (Set)getIntent().getSerializableExtra("set");
         groupPosition = extras.getInt("groupPosition");
         childPosition = extras.getInt("childPosition");
+        isSelected = extras.getBoolean("selected");
         weightField.setText(String.valueOf(set.getWeight()));
         repsField.setText(String.valueOf(set.getReps()));
     }
@@ -45,14 +47,12 @@ public class editSetActivity extends Activity {
         newSet.setWeight(Integer.parseInt(editText.getText().toString()));
         editText = (EditText)findViewById(R.id.editText2);
         newSet.setReps(Integer.parseInt(editText.getText().toString()));
+        newSet.setSelected(isSelected);
         Intent intent = new Intent();
         intent.putExtra("set", newSet);
         intent.putExtra("groupPosition", groupPosition);
         intent.putExtra("childPosition", childPosition);
-
         setResult(RESULT_OK, intent);
-        Log.d("cia", "------");
-
         finish();
     }
 

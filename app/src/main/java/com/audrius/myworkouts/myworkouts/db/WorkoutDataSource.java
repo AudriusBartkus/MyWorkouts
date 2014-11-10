@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.audrius.myworkouts.myworkouts.models.Exercise;
 import com.audrius.myworkouts.myworkouts.models.Workout;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,15 +19,23 @@ public class WorkoutDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private String[] allColumns = { MySQLiteHelper.WORKOUTS_ID, MySQLiteHelper.WORKOUTS_NAME, MySQLiteHelper.WORKOUTS_TIME};
+    private  ExerciseDataSource exerciseDataSource;
 
     public WorkoutDataSource(Context context){
         dbHelper = new MySQLiteHelper(context);
+        exerciseDataSource = new ExerciseDataSource(context);
 
     }
 
-    public void open() { database = dbHelper.getReadableDatabase();}
+    public void open() {
+        database = dbHelper.getReadableDatabase();
+        exerciseDataSource.open();
+    }
 
-    public void close() { dbHelper.close(); }
+    public void close() {
+        dbHelper.close();
+        exerciseDataSource.close();
+    }
 
     public long createWorkout(Workout workout){
         ContentValues values = new ContentValues();
@@ -40,10 +50,12 @@ public class WorkoutDataSource {
 
 
     public void deleteWorkout(Workout workout){
-        //TODO: check if id is assigned when creating a workout and exercise
         long id = workout.getId();
+        ArrayList<Exercise> exList = exerciseDataSource.getExercisesById(id);
         database.delete(MySQLiteHelper.TABLE_WORKOUTS, MySQLiteHelper.WORKOUTS_ID + " = " + id, null);
-        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.EXERCISES_WORKOUT_ID + " = " + id, null);
+        for(Exercise exercise : exList){
+            exerciseDataSource.deleteExercise(exercise);
+        }
     }
 
     public ArrayList<Workout> getAllWorkouts(){

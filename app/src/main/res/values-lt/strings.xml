@@ -42,6 +42,7 @@
     <string name="about_message">Autorius: Audrius Bartkus</string>
     <string name="settings">Nustatymai</string>
     <string name="title_activity_settings">Nustatymai</string>
+    <string name="date">Data</string>
     <string-array name="languages">
         <item>Pasirinkite kalbą</item>
         <item>Lietuvių</item>

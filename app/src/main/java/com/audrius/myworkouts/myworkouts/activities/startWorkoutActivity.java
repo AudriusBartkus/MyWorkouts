@@ -108,6 +108,7 @@ public class startWorkoutActivity extends Activity {
         intent.putExtra("set", set);
         intent.putExtra("groupPosition", groupPosition);
         intent.putExtra("childPosition", childPosition);
+        intent.putExtra("selected", set.isSelected());
         startActivityForResult(intent, EDIT_RESPONSE);
 
     }
@@ -119,7 +120,6 @@ public class startWorkoutActivity extends Activity {
                 Set newSet = (Set)data.getSerializableExtra("set");
                 int groupPos = (Integer)data.getSerializableExtra("groupPosition");
                 int childPos = (Integer)data.getSerializableExtra("childPosition");
-                Log.d(String.valueOf(groupPos), String.valueOf(childPos));
                 ArrayList<Set> tempSet = (ArrayList<Set>)setList.get(groupPos);
                 tempSet.set(childPos, newSet);
                 setList.set(groupPos, tempSet);

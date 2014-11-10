@@ -12,8 +12,10 @@
         android:text="Workout name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:id="@+id/textView" />
+        android:textSize="34sp"
+        android:id="@+id/textView"
+        android:fontFamily="sans-serif-bold"
+        android:textColor="@color/blueDark"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,10 +23,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/time"
         android:id="@+id/timeText"
-        android:textSize="25sp"
-        android:layout_alignTop="@+id/timeTextView"
-        android:layout_toRightOf="@+id/timeTextView"
-        android:layout_toEndOf="@+id/timeTextView" />
+        android:textSize="24sp"
+        android:layout_toEndOf="@+id/timeTextView"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/blue"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/timeTextView" />
 
     <ExpandableListView
         android:layout_width="wrap_content"
@@ -39,8 +43,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/timeTextView"
         android:textIsSelectable="false"
-        android:textSize="25sp"
-        android:text="Time:"
+        android:textSize="24sp"
+        android:text="@string/time"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/blue"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -48,12 +54,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="date"
+        android:text="@string/date"
         android:id="@+id/dateTextView"
-        android:layout_below="@+id/timeText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textSize="20sp"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/blue"
+        android:layout_below="@+id/timeTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
